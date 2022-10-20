@@ -8,9 +8,9 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Product data
   try {
     const allTags = await Tag.findAll({
-      include: [{ model: Product}],
+      include: [{ model: Product, through: ProductTag  }],
     });
-    res.status(200).json(allTag);
+    res.status(200).json(allTags);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -52,13 +52,13 @@ router.post('/', async (req, res) => {
 //     const updateTagById = await Tag.update(req.body, {
 //       where: {
 //         tag_id: req.params.tag_id,
-//       },
-//     })
-//     .then((updateTagById) => {
-//       return Tag.findAll({
-//         where: {
-//           tag_id: req.params.tag_id
-//         }
+    //   },
+    // })
+    // .then((updateTagById) => {
+    //   return Tag.findAll({
+    //     where: {
+    //       tag_id: req.params.tag_id
+    //     }
 //       });
 //     })
 //     .then ((updateTagById) => {
@@ -67,7 +67,7 @@ router.post('/', async (req, res) => {
 //       }) => tag_id);
 //       const newTagId = req.body.tag_id.filter((tag_id) => !searchTagId.includes((tag_id).map((tag_id) => {
 //         return req.params.tag_id,
-//       };
+//       });
 //     });
 
 //   }
